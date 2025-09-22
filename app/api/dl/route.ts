@@ -15,9 +15,9 @@ function yymmdd(input?: string) {
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
-  const gtin = searchParams.get('gtin') // 14-digit GTIN
-  const lot  = searchParams.get('lot')  // batch/lot
-  const exp  = searchParams.get('exp')  // YYYY-MM-DD or YYYYMMDD
+  const gtin = searchParams.get('gtin') // 14-digit GTIN required
+  const lot  = searchParams.get('lot')  // optional batch/lot
+  const exp  = searchParams.get('exp')  // optional YYYY-MM-DD or YYYYMMDD
   const base = searchParams.get('base') || 'https://id.gs1.org'
 
   if (!gtin) return new Response('Missing gtin', { status: 400 })
@@ -25,7 +25,5 @@ export async function GET(req: Request) {
   let path = `/01/${gtin}`
   if (lot) path += `/10/${encodeURIComponent(lot)}`
   if (exp) path += `/17/${yymmdd(exp)}`
-  const dl = `${base}${path}`
-
-  return Response.json({ dl })
+  return Response.json({ dl: `${base}${path}` })
 }
