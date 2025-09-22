@@ -1,6 +1,9 @@
 
 import QRCode from "qrcode"
 
+// (optional) force Node runtime; not required, but fine
+export const runtime = "nodejs"
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
   const text = searchParams.get("text")
@@ -13,14 +16,12 @@ export async function GET(req: Request) {
     margin: 1,
   })
 
-  // Use Uint8Array (Fetch BodyInit) instead of Node Buffer
-  const body = new Uint8Array(buf)
+  // Convert Buffer -> ArrayBuffer for Fetch Response
+  const ab = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength)
+  const blob = new Blob([ab], { type: "image/png" })
 
-  return new Response(body, {
-    headers: {
-      "Content-Type": "image/png",
-      "Cache-Control": "no-store",
-    },
+  return new Response(blob, {
+    headers: { "Cache-Control": "no-store" },
   })
 }
 
