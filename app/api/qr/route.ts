@@ -7,14 +7,20 @@ export async function GET(req: Request) {
   const size = Number(searchParams.get("size") || 512)
   if (!text) return new Response("Missing text", { status: 400 })
 
-  const png = await QRCode.toBuffer(text, {
+  const buf = await QRCode.toBuffer(text, {
     errorCorrectionLevel: "M",
     width: size,
-    margin: 1
+    margin: 1,
   })
 
-  return new Response(png, {
-    headers: { "Content-Type": "image/png", "Cache-Control": "no-store" }
+  // Use Uint8Array (Fetch BodyInit) instead of Node Buffer
+  const body = new Uint8Array(buf)
+
+  return new Response(body, {
+    headers: {
+      "Content-Type": "image/png",
+      "Cache-Control": "no-store",
+    },
   })
 }
 
