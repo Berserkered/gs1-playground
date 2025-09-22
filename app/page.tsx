@@ -1,5 +1,4 @@
 
-cat > app/page.tsx << 'EOF'
 "use client"
 import { useState } from "react"
 
@@ -56,3 +55,4 @@ export default function Home() {
     </main>
   )
 }
+

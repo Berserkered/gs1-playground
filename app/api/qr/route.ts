@@ -17,3 +17,4 @@ export async function GET(req: Request) {
     headers: { "Content-Type": "image/png", "Cache-Control": "no-store" }
   })
 }
+
