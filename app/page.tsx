@@ -171,3 +171,21 @@ export default function Home() {
     </main>
   );
 }
+
+import Link from "next/link";
+
+export default function Home() {
+  return (
+    <main>
+      <h1>Welcome to Playground</h1>
+      <p>GA4 testing site</p>
+
+      {/* Add this external link */}
+      <p>
+        <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">
+          Test outbound link → Google
+        </a>
+      </p>
+    </main>
+  );
+}
