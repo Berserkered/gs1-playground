@@ -1,7 +1,7 @@
-// app/layout.tsx
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,17 +10,13 @@ export const metadata = {
   description: "GS1 demo playground",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         {/* Google Analytics */}
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=G-HH66KHLBS1`}
+          src="https://www.googletagmanager.com/gtag/js?id=G-HH66KHLBS1"
           strategy="afterInteractive"
         />
         <Script id="ga4-init" strategy="afterInteractive">
@@ -32,7 +28,10 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <Analytics /> {/* keep this at the end of body */}
+      </body>
     </html>
   );
 }
