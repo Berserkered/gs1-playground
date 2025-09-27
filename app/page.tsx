@@ -37,6 +37,7 @@ export default function Home() {
     padding: "10px 12px",
     width: "100%",
   } as const;
+
   return (
     <main style={{ maxWidth: 900, margin: "40px auto", padding: "0 16px" }}>
       <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 8 }}>
@@ -44,6 +45,13 @@ export default function Home() {
       </h1>
       <p style={{ opacity: 0.75, marginBottom: 16 }}>
         Build a Digital Link from GTIN + optional Lot (10) + Expiry (17).
+      </p>
+
+      {/* Test outbound link for GA4 */}
+      <p style={{ marginBottom: 16 }}>
+        <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">
+          Test outbound link → Google
+        </a>
       </p>
 
       <label>GTIN (14 digits)</label>
@@ -105,9 +113,7 @@ export default function Home() {
             marginTop: 16,
           }}
         >
-          <div
-            style={{ padding: 12, border: "1px solid #eee", borderRadius: 8 }}
-          >
+          <div style={{ padding: 12, border: "1px solid #eee", borderRadius: 8 }}>
             <div style={{ fontWeight: 600, marginBottom: 6 }}>Digital Link</div>
             <code style={{ wordBreak: "break-all" }}>{dl}</code>
             <div style={{ marginTop: 10, display: "flex", gap: 10 }}>
@@ -168,24 +174,6 @@ export default function Home() {
           </div>
         </div>
       )}
-    </main>
-  );
-}
-
-import Link from "next/link";
-
-export default function Home() {
-  return (
-    <main>
-      <h1>Welcome to Playground</h1>
-      <p>GA4 testing site</p>
-
-      {/* Add this external link */}
-      <p>
-        <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">
-          Test outbound link → Google
-        </a>
-      </p>
     </main>
   );
 }
